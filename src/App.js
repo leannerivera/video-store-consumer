@@ -65,7 +65,7 @@ class App extends Component {
       library,
     })
   };
-
+}
   addRental = (newRental) => {
     const dueDate = Date.now() +7;
     const apiPayload = {
