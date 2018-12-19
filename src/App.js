@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
+
 import logo from './logo.svg';
 import SearchForm from './components/SearchForm'
 import MovieLibrary from './components/MovieLibrary'
 import MovieCard from './components/MovieCard'
-import {Browser as Router, Route, Link } from "react-router-dom";
-=======
-
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
->>>>>>> master
+
 import './App.css';
 import  axios from 'axios';
 import CustomerList from './components/CustomerList';
@@ -24,9 +21,12 @@ class App extends Component {
     super(props);
 
     this.state = {
-<<<<<<< HEAD
       library: [],
       currentMovie: undefined,
+
+      customerSelectedId: undefined,
+      customerSelectedName:undefined,
+
     };
   }
 
@@ -66,14 +66,6 @@ class App extends Component {
     })
   };
 
-=======
-      movieSelected: undefined,
-      customerSelectedId: undefined,
-      customerSelectedName:undefined,
-
-    };
-  }
-
   addRental = (newRental) => {
     const dueDate = Date.now() +7;
     const apiPayload = {
@@ -109,24 +101,9 @@ class App extends Component {
 
   };
 
-
->>>>>>> master
   render() {
 
     return (
-<<<<<<< HEAD
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-
-        </p>
-      </div>
-    )
-  })
-=======
       <Router>
         <div className="App">
           <nav>
@@ -163,7 +140,7 @@ class App extends Component {
 
     );
   }
->>>>>>> master
+
 }
 
 export default App;
