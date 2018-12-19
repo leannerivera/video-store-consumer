@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import logo from './logo.svg';
 import SearchForm from './components/SearchForm'
 import MovieLibrary from './components/MovieLibrary'
 import MovieCard from './components/MovieCard'
 import {Browser as Router, Route, Link } from "react-router-dom";
+=======
+
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+>>>>>>> master
 import './App.css';
+import  axios from 'axios';
+import CustomerList from './components/CustomerList';
+import Rental from './components/Rental';
+import Home from './components/Home';
+
 
 const URL = 'http://www.localhost:3000/';
 const SEARCH_URL = 'localhost:3000/movies/?query='
@@ -14,6 +24,7 @@ class App extends Component {
     super(props);
 
     this.state = {
+<<<<<<< HEAD
       library: [],
       currentMovie: undefined,
     };
@@ -55,8 +66,55 @@ class App extends Component {
     })
   };
 
+=======
+      movieSelected: undefined,
+      customerSelectedId: undefined,
+      customerSelectedName:undefined,
+
+    };
+  }
+
+  addRental = (newRental) => {
+    const dueDate = Date.now() +7;
+    const apiPayload = {
+      ...newRental,
+      customer: this.state.customerSelectedId,
+      dueDate: dueDate,
+    }
+
+
+    const url = "http://localhost:3000/Psycho/checkout";
+    axios.post(url, apiPayload)
+    .then((response)=>{
+      // console.log('API Response Success')
+      // console.log(response);
+      const myNewRental = response.data;
+
+      this.setState({
+        movieSelected:"",
+        customerSelected:"",
+        errorMessage:'Rental added',
+      })
+    })
+    .catch((error)=>{
+      this.setState({
+        errorMessage:`Failure ${error.message}`,
+      })
+    });
+  };
+
+  selectCustomer = (customerId, customerName)=>{
+
+    this.setState({customerSelectedId: customerId, customerSelectedName: customerName});
+
+  };
+
+
+>>>>>>> master
   render() {
+
     return (
+<<<<<<< HEAD
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -68,6 +126,44 @@ class App extends Component {
       </div>
     )
   })
+=======
+      <Router>
+        <div className="App">
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/search">Search</Link>
+              </li>
+              <li>
+                <Link to="/library">Library</Link>
+              </li>
+              <li>
+                <Link to="/customers/">Customers</Link>
+              </li>
+            </ul>
+
+            <section className="rentalBox">
+              <Rental
+                customerId = {this.state.customerSelectedId}
+                customerName = {this.state.customerSelectedName}
+                movie = {this.state.movieSelected}
+                addRentalCallback={this.addRental}
+                />
+            </section>
+          </nav>
+
+          <Route path="/" exact component={Home} />
+          <Route path="/customers/" render={()=> <CustomerList selectCustomerCallback={this.selectCustomer}/>} />
+        </div>
+
+      </Router>
+
+    );
+  }
+>>>>>>> master
 }
 
 export default App;

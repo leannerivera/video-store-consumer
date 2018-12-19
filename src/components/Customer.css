@@ -1,0 +1,28 @@
+.customer{
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+}
+
+.item {
+    border: 1px solid #000;
+    border-radius: 1em;
+    overflow: hidden;
+    margin: 2em;
+    background-color: #e9e9e9;
+}
+
+.customer__content{
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+}
+
+.customer__content-name{
+  padding: 0 1.5em;
+  border-left: 2px solid #595959;
+  border-right: 2px solid #595959;
+}
+
+.customer__select-btn{
+  background-color: #cfcfcf;
+  font-size: 18px;
+}
