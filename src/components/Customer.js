@@ -14,8 +14,11 @@ class Customer extends Component {
 
     return (
       <div className="customer item">
-        <section className="customer__content">
-           <p className="customer__content-name">{this.props.name}</p>
+           <div claaName="item_details">
+             <h2 className="customer__content-name">{this.props.name}</h2>
+             <p></p>
+             <p className="movie_checkout_count">{this.props.movieCheckCount} movies checked out</p>
+           </div>
            <button
              onClick={() => this.props.selectCustomerCallback(this.props.id, this.props.name)}
              type="button"
@@ -24,7 +27,6 @@ class Customer extends Component {
            >
            Select For Rental
            </button>
-        </section>
       </div>
     );
   }
@@ -32,8 +34,9 @@ class Customer extends Component {
 
 Customer.propTypes = {
    name: PropTypes.string.isRequired,
-   id: PropTypes.number,
-   selectCustomerCallback: PropTypes.func.isRequired
+   id: PropTypes.number.isRequired,
+   selectCustomerCallback: PropTypes.func.isRequired,
+   movieCheckCount: PropTypes.number.isRequired,
 }
 
 export default Customer;

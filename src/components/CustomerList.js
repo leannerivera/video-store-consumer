@@ -6,44 +6,20 @@ import Customer from './Customer';
 import './CustomerList.css';
 
 
-const URL ="http://localhost:3000/customers"
-
 class CustomerList extends Component {
   constructor() {
     super();
 
-    this.state = {
-      customers: [],
-    };
   }
-
-  componentDidMount() {
-
-    axios.get(`${URL}`)
-     .then((response)=>{
-
-       this.setState({
-         customers: response.data,
-       });
-     })
-     .catch((error)=>{
-       this.setState({
-         errorMessage: error.message,
-       });
-     });
-
-
-  }
-
-
 
   render() {
-    const customerList = this.state.customers.map((customer)=>{
+    const customerList = this.props.customers.map((customer)=>{
 
       return <Customer
         key={customer.id}
         id={customer.id}
         name={customer.name}
+        movieCheckCount={customer.movies_checked_out_count}
         selectCustomerCallback={this.props.selectCustomerCallback}
       />
     });
@@ -51,9 +27,6 @@ class CustomerList extends Component {
     return (
 
       <div>
-        <section className="errorMessage">
-         { this.state.errorMessage}
-        </section>
         <section className="customerList">
              {customerList}
         </section>
@@ -65,7 +38,7 @@ class CustomerList extends Component {
 
 CustomerList.propTypes = {
     selectCustomerCallback: PropTypes.func.isRequired,
-
+    customers: PropTypes.array.isRequired,
 };
 
 export default CustomerList;
