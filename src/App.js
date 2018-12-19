@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 import  axios from 'axios';
 import CustomerList from './components/CustomerList';
 import Rental from './components/Rental';
-
+import Home from './components/Home';
 
 
 class App extends Component {
@@ -14,18 +14,23 @@ class App extends Component {
 
     this.state = {
       movieSelected: undefined,
-      customerSelected: undefined,
+      customerSelectedId: undefined,
+      customerSelectedName:undefined,
+
     };
   }
 
   addRental = (newRental) => {
+    const dueDate = Date.now() +7;
     const apiPayload = {
       ...newRental,
-      customer: newRental.customer,
-      movie: newRental.movie,
+      customer: this.state.customerSelectedId,
+      dueDate: dueDate,
     }
 
-    axios.post(URL, apiPayload)
+
+    const url = "http://localhost:3000/Psycho/checkout";
+    axios.post(url, apiPayload)
     .then((response)=>{
       // console.log('API Response Success')
       // console.log(response);
@@ -44,22 +49,22 @@ class App extends Component {
     });
   };
 
-  // selectCustomer = (customer)=>{
-  //   {movieSelected, customerSelected} = this.state;
-  //   customerSelected = customer;
-  //   this.setState{customerSelected};
-  // };
+  selectCustomer = (customerId, customerName)=>{
+
+    this.setState({customerSelectedId: customerId, customerSelectedName: customerName});
+
+  };
 
 
   render() {
-    return (
 
+    return (
       <Router>
         <div className="App">
           <nav>
             <ul>
               <li>
-                <Link to="/home">Home</Link>
+                <Link to="/">Home</Link>
               </li>
               <li>
                 <Link to="/search">Search</Link>
@@ -72,21 +77,18 @@ class App extends Component {
               </li>
             </ul>
 
-            <section>
+            <section className="rentalBox">
               <Rental
-                customer = {this.state.customerSelected}
+                customerId = {this.state.customerSelectedId}
+                customerName = {this.state.customerSelectedName}
                 movie = {this.state.movieSelected}
                 addRentalCallback={this.addRental}
                 />
             </section>
           </nav>
 
-          <section>
-            <CustomerList selectCustomerCallback ={this.selectCustomer} />
-          </section>
-
-
-          <Route path="/customer/" component={CustomerList} />
+          <Route path="/" exact component={Home} />
+          <Route path="/customers/" render={()=> <CustomerList selectCustomerCallback={this.selectCustomer}/>} />
         </div>
 
       </Router>
