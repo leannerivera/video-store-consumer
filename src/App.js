@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
-
-import logo from './logo.svg';
-import SearchForm from './components/SearchForm'
-import MovieLibrary from './components/MovieLibrary'
-import MovieCard from './components/MovieCard'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
-import './App.css';
-import  axios from 'axios';
-import CustomerList from './components/CustomerList';
-import Rental from './components/Rental';
 import Home from './components/Home';
-
+import axios from 'axios';
+import SearchForm from './components/SearchForm';
+import MovieLibrary from './components/MovieLibrary';
+import {BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Rental from './components/Rental';
+import CustomerList from './components/CustomerList';
 
 const URL = 'http://www.localhost:3000/';
-const SEARCH_URL = 'localhost:3000/movies/?query='
+// const SEARCH_URL = 'http://localhost:3000/movies/?query=';
+const RENTAL_URL = 'http://localhost:3000/rentals/';
 
 class App extends Component {
   constructor(props) {
@@ -22,70 +17,45 @@ class App extends Component {
 
     this.state = {
       library: [],
-      currentMovie: undefined,
-
+      movieSelected: "",
       customerSelectedId: undefined,
       customerSelectedName:undefined,
-
     };
   }
 
-  componentDidMount() {
-    axios.get(URL)
-    .then((response) =>{
-      const movies = response.data.map((movie) => {
-        console.log(movie.title);
-          const movie = {
-          ...movie,
-          id: movie.id,
-          movie: movie.title,
-          about: movie.overview,
-          image: movie.image_url,
-        }
-        return movie;
-      })
 
-    this.setState({
-      library: movies,
-    })
-  })
-  .catch((error) => {
-    console.log(error.message);
-    this.setState({
-      errorMessage: error.message,
-    })
-  })
 
-  onSearchChange = (value) => {
-    console.log(value);
-    const library = movies.filter((movie) => {
-      return regex.test(`$(movie.name)`)
-    })
-    this.setState({
-      library,
-    })
-  };
-}
   addRental = (newRental) => {
-    const dueDate = Date.now() +7;
+    let rentalDue = new Date(new Date().getTime()+(14*24*60*60*1000));
+    let dd = rentalDue.getDate();
+    let mm = rentalDue.getMonth()+1;
+    let yyyy = rentalDue.getFullYear();
+    const selectedMovie = encodeURIComponent(this.state.movieSelected);
+
+    if(dd<10) {
+      dd='0'+dd
+    }
+
+    if(mm<10) {
+      mm='0'+mm;
+    }
+
+    const dueDate = yyyy.toString() + "-"+mm.toString()+"-"+dd.toString();
     const apiPayload = {
       ...newRental,
       customer: this.state.customerSelectedId,
       dueDate: dueDate,
     }
 
-
-    const url = "http://localhost:3000/Psycho/checkout";
-    axios.post(url, apiPayload)
+    axios.post(RENTAL_URL + selectedMovie, apiPayload)
     .then((response)=>{
       // console.log('API Response Success')
       // console.log(response);
       const myNewRental = response.data;
 
       this.setState({
-        movieSelected:"",
-        customerSelected:"",
-        errorMessage:'Rental added',
+        movieSelected: "",
+        customerSelected: "",
       })
     })
     .catch((error)=>{
@@ -95,11 +65,52 @@ class App extends Component {
     });
   };
 
-  selectCustomer = (customerId, customerName)=>{
 
+
+  componentDidMount() {
+    axios.get(URL)
+    .then((response) =>{
+      const movies = response.data.map((film) => {
+        console.log(movie.title);
+        const movie = {
+          ...movie,
+          id: film.id,
+          movie: film.title,
+          about: film.overview,
+          image: film.image_url,
+        }
+        return movie;
+      })
+
+      this.setState({
+        library: movies,
+      })
+    })
+    .catch((error) => {
+      console.log(error.message);
+      this.setState({
+        errorMessage: error.message,
+      })
+    })
+  }
+
+  onSearchChange = (value) => {
+    const regex = new RegExp(`${value}`.toUpperCase());
+    console.log(value);
+    const library = this.state.library.filter((movie) => {
+      return regex.test(movie.name)
+    })
+    this.setState({
+      library,
+    })
+  };
+
+  selectCustomer = (customerId, customerName)=>{
     this.setState({customerSelectedId: customerId, customerSelectedName: customerName});
 
   };
+
+
 
   render() {
 
@@ -129,18 +140,20 @@ class App extends Component {
                 movie = {this.state.movieSelected}
                 addRentalCallback={this.addRental}
                 />
+              <SearchForm />
             </section>
           </nav>
 
           <Route path="/" exact component={Home} />
           <Route path="/customers/" render={()=> <CustomerList selectCustomerCallback={this.selectCustomer}/>} />
+          <Route path="/movies/" render={()=> <MovieLibrary />} />
         </div>
 
       </Router>
 
     );
   }
-
 }
+
 
 export default App;
