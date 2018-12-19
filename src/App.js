@@ -56,7 +56,9 @@ class App extends Component {
       this.setState({
         movieSelected: "",
         customerSelected: "",
-      })
+      });
+
+      window.location.reload();
     })
     .catch((error)=>{
       this.setState({
@@ -139,14 +141,16 @@ class App extends Component {
                 customerName = {this.state.customerSelectedName}
                 movie = {this.state.movieSelected}
                 addRentalCallback={this.addRental}
+
                 />
-              <SearchForm />
+
             </section>
           </nav>
 
           <Route path="/" exact component={Home} />
+          <Route path="/search/" render={()=> <SearchForm searchMovieCallback={this.onSearchChange}/>} />
           <Route path="/customers/" render={()=> <CustomerList selectCustomerCallback={this.selectCustomer}/>} />
-          <Route path="/movies/" render={()=> <MovieLibrary />} />
+          <Route path="/library/" render={()=> <MovieLibrary movies={this.state.library}/>} />
         </div>
 
       </Router>
