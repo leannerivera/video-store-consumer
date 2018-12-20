@@ -16,6 +16,7 @@ class SearchForm extends Component {
     this.setState({
       movie: event.target.value.toUpperCase(),
     });
+    this.props.onChangeHandler(event.target.value);
   }
 
   onSubmitHandler = (event) => {
@@ -55,6 +56,7 @@ class SearchForm extends Component {
 
 SearchForm.propTypes = {
   searchMovieCallback: PropTypes.func.isRequired,
+  onChangeHandler: PropTypes.func,
 };
 
 
