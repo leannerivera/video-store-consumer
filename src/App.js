@@ -125,6 +125,12 @@ class App extends Component {
   };
 
   selectCustomer = (customerId, customerName)=>{
+    
+    this.setState({customerSelectedId: customerId, customerSelectedName: customerName});
+
+  };
+
+  selectMove = (movieId, movieName)=>{
 
     this.setState({customerSelectedId: customerId, customerSelectedName: customerName});
 
