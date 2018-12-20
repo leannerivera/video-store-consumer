@@ -49,7 +49,7 @@ class App extends Component {
     axios.post(RENTAL_URL + selectedMovie+'/check-out', apiPayload)
     .then((response)=>{
 
-      const myNewRental = response.data;
+      // const myNewRental = response.data;
 
       this.setState({
         movieSelected: "",
@@ -156,12 +156,9 @@ class App extends Component {
 
             <section className="rentalBox">
               <Rental
-
                 customerSelect = {this.state.customerSelected}
                 movieSelect = {this.state.movieSelected}
-
                 addRentalCallback={this.addRental}
-
                 />
 
             </section>

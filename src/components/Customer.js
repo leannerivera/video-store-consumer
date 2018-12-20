@@ -14,7 +14,7 @@ class Customer extends Component {
 
     return (
       <div className="customer item">
-           <div claaName="item_details">
+           <div className="item_details">
              <h2 className="customer__content-name">{this.props.name}</h2>
              <p></p>
              <p className="movie_checkout_count">{this.props.movieCheckCount} movies checked out</p>
