@@ -1,3 +1,12 @@
 .new-rental-form {
   text-align: left;
+  display:flex;
+  flex-flow: row;
+  justify-content:space-evenly;
+
+}
+
+.new-rental-form--label{
+  color: white;
+  margin: 2%;
 }
