@@ -24,13 +24,12 @@ class App extends Component {
   }
 
 
-
   addRental = (newRental) => {
     let rentalDue = new Date(new Date().getTime()+(14*24*60*60*1000));
     let dd = rentalDue.getDate();
     let mm = rentalDue.getMonth()+1;
     let yyyy = rentalDue.getFullYear();
-    const selectedMovie = encodeURIComponent(this.state.movieSelected);
+    const selectedMovie = encodeURIComponent(this.state.movieSelected.title);
 
     if(dd<10) {
       dd='0'+dd
@@ -43,11 +42,11 @@ class App extends Component {
     const dueDate = yyyy.toString() + "-"+mm.toString()+"-"+dd.toString();
     const apiPayload = {
       ...newRental,
-      customer: this.state.customerSelectedId,
-      dueDate: dueDate,
+      customer_id: this.state.customerSelected.id,
+      due_date: dueDate,
     }
 
-    axios.post(RENTAL_URL + selectedMovie, apiPayload)
+    axios.post(RENTAL_URL + selectedMovie+'/check-out', apiPayload)
     .then((response)=>{
 
       const myNewRental = response.data;
