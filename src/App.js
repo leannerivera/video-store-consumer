@@ -18,8 +18,6 @@ class App extends Component {
     this.state = {
       library: [],
       movieSelected: "",
-      customerSelectedId: undefined,
-      customerSelectedName:undefined,
       customers: [],
       customerSelected: "",
     };
@@ -51,8 +49,7 @@ class App extends Component {
 
     axios.post(RENTAL_URL + selectedMovie, apiPayload)
     .then((response)=>{
-      // console.log('API Response Success')
-      // console.log(response);
+
       const myNewRental = response.data;
 
       this.setState({
@@ -74,17 +71,6 @@ class App extends Component {
   componentDidMount() {
     axios.get(URL)
     .then((response) =>{
-      // const movies = response.data.map((film) => {
-      //   console.log(movie.title);
-      //   const movie = {
-      //     ...movie,
-      //     id: film.id,
-      //     movie: film.title,
-      //     about: film.overview,
-      //     image: film.image_url,
-      //   }
-      //   return movie;
-      // })
 
       this.setState({
         library: response.data,
@@ -122,17 +108,27 @@ class App extends Component {
     this.setState({
       library,
     })
+  }
+
+  selectCustomer = (customerId)=>{
+    let customerClicked = this.state.customers.find(function(element) {
+      if (element.id == customerId) {
+      return element }
+    }) ;
+
+    this.setState({customerSelected: customerClicked});
+
   };
 
-  selectCustomer = (customerId, customerName)=>{
-    
-    this.setState({customerSelectedId: customerId, customerSelectedName: customerName});
+  selectMovie = (movieId)=>{
+    console.log(movieId);
+    let movieClicked = this.state.library.find(function(element) {
+      if (element.id == movieId) {
+      return element }
+    }) ;
 
-  };
+    this.setState({movieSelected: movieClicked});
 
-  selectMove = (movieId, movieName)=>{
-
-    this.setState({customerSelectedId: customerId, customerSelectedName: customerName});
 
   };
 
@@ -161,9 +157,10 @@ class App extends Component {
 
             <section className="rentalBox">
               <Rental
-                customerId = {this.state.customerSelectedId}
-                customerName = {this.state.customerSelectedName}
-                movie = {this.state.movieSelected}
+
+                customerSelect = {this.state.customerSelected}
+                movieSelect = {this.state.movieSelected}
+
                 addRentalCallback={this.addRental}
 
                 />

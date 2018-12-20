@@ -20,7 +20,7 @@ class Customer extends Component {
              <p className="movie_checkout_count">{this.props.movieCheckCount} movies checked out</p>
            </div>
            <button
-             onClick={() => this.props.selectCustomerCallback(this.props.id, this.props.name)}
+             onClick={() => this.props.selectCustomerCallback(this.props.id)}
              type="button"
              className="customer__select-btn"
              label="Select"
