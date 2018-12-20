@@ -1,0 +1,16 @@
+.movie-card {
+  border: 2px solid black;
+}
+
+.movie-card__body {
+  border: 1px dashed black;
+  margin: 3px;
+  text-align: center;
+  background: whitesmoke;
+}
+
+h1 {
+  color: red;
+  font-size: 2rem;
+  font-family: Georgia, serif;
+}

@@ -39,6 +39,7 @@ class MovieLibrary extends Component {
     const movieList = {movieList}
     return (
       <div className="library">
+        <h1> Library</h1>
         {movieList}
       </div>
     )

@@ -32,22 +32,24 @@ class SearchForm extends Component {
 
   render () {
     return (
-      <form
-        name="movie-search-bar"
-        id="movie-search-bar"
-        onSubmit={this.onSubmitHandler}
-      >
-        <label htmlFor="movie">Movie Title</label>
-        <input
-          name="movie"
-          id="movie"
-          value={this.state.movie}
-          onChange={this.onChangeHandler}
-        />
+      <div className='movie-search'>
+        <form
+          name="movie-search-bar"
+          id="movie-search-bar"
+          onSubmit={this.onSubmitHandler}
+        >
+          <label htmlFor="movie">Movie Title</label>
+          <input
+            name="movie"
+            id="movie"
+            value={this.state.movie}
+            onChange={this.onChangeHandler}
+          />
 
-        <input type="submit" value="submit" />
+          <input type="submit" value="submit" />
 
-      </form>
+        </form>
+      </div>
   )}
 }
 
