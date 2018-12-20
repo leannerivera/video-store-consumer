@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from './MovieCard';
 import axios from 'axios';
+import './MovieLibrary.css';
 
-const URL = 'http://localhost:3000/movies/';
+const URL = "http://localhost:3000/movies/";
 
 class MovieLibrary extends Component {
   constructor() {
     super();
 
     this.state = {
-      library: [],
+      list: [],
     };
   }
 
@@ -27,11 +28,11 @@ class MovieLibrary extends Component {
         errorMessage: error.message,
       });
     })
-  };
+  }
 
   movieList = this.state.library.map((movie) => {
     return <MovieCard key={movie.id}
-      selectMovieCallback={props.selectMovieCallback}
+      selectMovieCallback={movie.selectMovieCallback}
       {...movie} />
   });
 

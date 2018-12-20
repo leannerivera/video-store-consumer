@@ -6,7 +6,7 @@ import Customer from './Customer';
 import './CustomerList.css';
 
 
-const URL ="http://localhost:3000/customers"
+const URL ="http://localhost:3000/customers";
 
 class CustomerList extends Component {
   constructor() {

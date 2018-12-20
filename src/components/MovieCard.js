@@ -5,7 +5,7 @@ import './MovieCard.css';
 
 const MovieCard = (props) => {
   const { id, title } = props;
-  render() {
+
     return (
       <div className="movie-card">
         <section className="movie-card__body">
@@ -22,7 +22,6 @@ const MovieCard = (props) => {
 
     );
   }
-}
 
 MovieCard.propTypes = {
   id: PropTypes.number.isRequired,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-
+import './SearchForm.css';
 
 class SearchForm extends Component {
   constructor(props) {
@@ -46,7 +46,7 @@ class SearchForm extends Component {
             onChange={this.onChangeHandler}
           />
 
-          <input type="submit" value="submit" />
+          <input type="submit" value="submit" onSubmit={this.onSubmitHandler}/>
 
         </form>
       </div>
