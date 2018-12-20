@@ -3,20 +3,48 @@ import PropTypes from 'prop-types';
 import MovieCard from './MovieCard';
 import axios from 'axios';
 
+const URL = 'http://localhost:3000/movies/';
 
-const MovieLibrary = (props) => {
-  const movieLibrary = props.movies.map((movie) => {
+class MovieLibrary extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      library: [],
+    };
+  }
+
+  componentDidMount() {
+    axios.get(URL)
+    .then((response) => {
+      this.setState({
+        library: response.data,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      this.setState({
+        errorMessage: error.message,
+      });
+    })
+  };
+
+  movieList = this.state.library.map((movie) => {
     return <MovieCard key={movie.id}
-             selectMovieCallback={props.selectMovieCallback}
-             {...movie} />
+      selectMovieCallback={props.selectMovieCallback}
+      {...movie} />
   });
 
-  return (
-    <div className="library">
-      {movieLibrary}
-    </div>
-  )
+  render() {
+    const movieList = {movieList}
+    return (
+      <div className="library">
+        {movieList}
+      </div>
+    )
+  }
 }
+
 
 MovieLibrary.propTypes = {
   movies: PropTypes.array,

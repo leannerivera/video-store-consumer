@@ -166,6 +166,7 @@ class App extends Component {
           </nav>
 
           <Route path="/" exact component={Home} />
+
           <Route path="/search/" render={()=> <SearchForm searchMovieCallback={this.onSearchChange}/>} />
           <Route path="/customers/" render={()=>
             <CustomerList customers={this.state.customers} selectCustomerCallback={this.selectCustomer}/>}
