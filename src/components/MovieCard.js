@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import './MovieCard.css';
 
 const MovieCard = (props) => {
   const { id, title ,image_url} = props;
