@@ -3,13 +3,15 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 
 const MovieCard = (props) => {
-  const { id, title } = props;
+  const { id, title ,image_url} = props;
 
     return (
       <div className="movie-card">
-
+        <section className="movie-img">
+         {image_url}
+        </section>
         <section className="movie-card--body">
-          { props.title }
+          <p className="movie_title">{title }</p>
           <button
             onClick={() => this.props.selectMovieCallback(id, title)}
             type="button"
@@ -28,6 +30,7 @@ MovieCard.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  image_url: PropTypes.string.isRequired,
   selectMovieCallback: PropTypes.func.isRequired,
 };
 

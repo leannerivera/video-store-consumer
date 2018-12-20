@@ -74,21 +74,21 @@ class App extends Component {
   componentDidMount() {
     axios.get(URL)
     .then((response) =>{
-      const movies = response.data.map((film) => {
-        console.log(movie.title);
-        const movie = {
-          ...movie,
-          id: film.id,
-          movie: film.title,
-          about: film.overview,
-          image: film.image_url,
-        }
-        return movie;
-      })
+      // const movies = response.data.map((film) => {
+      //   console.log(movie.title);
+      //   const movie = {
+      //     ...movie,
+      //     id: film.id,
+      //     movie: film.title,
+      //     about: film.overview,
+      //     image: film.image_url,
+      //   }
+      //   return movie;
+      // })
 
       this.setState({
-        library: movies,
-      })
+        library: response.data,
+      });
     })
     .catch((error) => {
       console.log(error.message);
@@ -125,7 +125,7 @@ class App extends Component {
   };
 
   selectCustomer = (customerId, customerName)=>{
-    
+
     this.setState({customerSelectedId: customerId, customerSelectedName: customerName});
 
   };
