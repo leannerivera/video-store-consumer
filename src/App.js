@@ -20,6 +20,8 @@ class App extends Component {
       movieSelected: "",
       customerSelectedId: undefined,
       customerSelectedName:undefined,
+      customers: [],
+      customerSelected: "",
     };
   }
 
@@ -56,7 +58,9 @@ class App extends Component {
       this.setState({
         movieSelected: "",
         customerSelected: "",
-      })
+      });
+
+      window.location.reload();
     })
     .catch((error)=>{
       this.setState({
@@ -92,6 +96,21 @@ class App extends Component {
         errorMessage: error.message,
       })
     })
+
+    const url = "http://localhost:3000/customers";
+    axios.get(url)
+     .then((response)=>{
+
+       this.setState({
+         customers: response.data,
+       });
+     })
+     .catch((error)=>{
+       this.setState({
+         errorMessage: error.message,
+       });
+     });
+
   }
 
   onSearchChange = (value) => {
@@ -106,6 +125,7 @@ class App extends Component {
   };
 
   selectCustomer = (customerId, customerName)=>{
+    
     this.setState({customerSelectedId: customerId, customerSelectedName: customerName});
 
   };
@@ -139,14 +159,21 @@ class App extends Component {
                 customerName = {this.state.customerSelectedName}
                 movie = {this.state.movieSelected}
                 addRentalCallback={this.addRental}
+
                 />
-              <SearchForm searchMovieCallback={this.onSearchChange}/>
+
             </section>
           </nav>
 
           <Route path="/" exact component={Home} />
-          <Route path="/customers/" render={()=> <CustomerList selectCustomerCallback={this.selectCustomer}/>} />
-          <Route path="/library/" render={()=> <MovieLibrary />} />
+
+          <Route path="/search/" render={()=> <SearchForm searchMovieCallback={this.onSearchChange}/>} />
+          <Route path="/customers/" render={()=>
+            <CustomerList customers={this.state.customers} selectCustomerCallback={this.selectCustomer}/>}
+          />
+          <Route path="/library/" render={()=>
+            <MovieLibrary movies={this.state.library} selectMovieCallback={this.selectMovie}/>}
+          />
         </div>
 
       </Router>
