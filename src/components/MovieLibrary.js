@@ -27,11 +27,11 @@ class MovieLibrary extends Component {
         errorMessage: error.message,
       });
     })
-  };
+  }
 
   movieList = this.state.library.map((movie) => {
     return <MovieCard key={movie.id}
-      selectMovieCallback={props.selectMovieCallback}
+      selectMovieCallback={this.props.selectMovieCallback}
       {...movie} />
   });
 
