@@ -4,22 +4,25 @@ import PropTypes from 'prop-types';
 
 const MovieCard = (props) => {
   const { id, title } = props;
-  return (
-    <div className="movie-card">
+  render() {
+    return (
+      <div className="movie-card">
 
-      <section className="movie-card--body">
-        { title }
-        <button
-          onSubmit={() => this.props.selectMovieCallback(this.props.id, this.props.name)}
-          type="button"
-          className="movie__select-btn"
-          label="Select"
-        />
-      </section>
-   </div>
+        <section className="movie-card--body">
+          { props.title }
+          <button
+            onClick={() => this.props.selectMovieCallback(this.props.id, this.props.title)}
+            type="button"
+            className="movie__select-btn"
+            label="Select"
+            />
+          Select
+        </section>
+      </div>
 
-  )
-};
+    );
+  }
+}
 
 MovieCard.propTypes = {
   id: PropTypes.number.isRequired,

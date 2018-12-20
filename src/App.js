@@ -140,13 +140,13 @@ class App extends Component {
                 movie = {this.state.movieSelected}
                 addRentalCallback={this.addRental}
                 />
-              <SearchForm />
+              <SearchForm searchMovieCallback={this.onSearchChange}/>
             </section>
           </nav>
 
           <Route path="/" exact component={Home} />
           <Route path="/customers/" render={()=> <CustomerList selectCustomerCallback={this.selectCustomer}/>} />
-          <Route path="/movies/" render={()=> <MovieLibrary />} />
+          <Route path="/library/" render={()=> <MovieLibrary />} />
         </div>
 
       </Router>
