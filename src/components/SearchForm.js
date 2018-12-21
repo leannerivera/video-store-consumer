@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-
+import './SearchForm.css';
 
 class SearchForm extends Component {
   constructor(props) {
@@ -16,6 +16,7 @@ class SearchForm extends Component {
     this.setState({
       movie: event.target.value.toUpperCase(),
     });
+    this.props.onChangeHandler(event.target.value);
   }
 
   onSubmitHandler = (event) => {
@@ -32,27 +33,30 @@ class SearchForm extends Component {
 
   render () {
     return (
-      <form
-        name="movie-search-bar"
-        id="movie-search-bar"
-        onSubmit={this.onSubmitHandler}
-      >
-        <label htmlFor="movie">Movie Title</label>
-        <input
-          name="movie"
-          id="movie"
-          value={this.state.movie}
-          onChange={this.onChangeHandler}
-        />
+      <div className='movie-search'>
+        <form
+          name="movie-search-bar"
+          id="movie-search-bar"
+          onSubmit={this.onSubmitHandler}
+        >
+          <label htmlFor="movie">Movie Title</label>
+          <input
+            name="movie"
+            id="movie"
+            value={this.state.movie}
+            onChange={this.onChangeHandler}
+          />
 
-        <input type="submit" value="submit" />
+          <input type="submit" value="submit" onSubmit={this.onSubmitHandler}/>
 
-      </form>
+        </form>
+      </div>
   )}
 }
 
 SearchForm.propTypes = {
   searchMovieCallback: PropTypes.func.isRequired,
+  onChangeHandler: PropTypes.func,
 };
 
 

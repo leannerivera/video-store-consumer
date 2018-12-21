@@ -1,43 +1,31 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 import PropTypes from 'prop-types';
-import './movieCard.css';
+import './MovieCard.css';
 
-// const MovieCard = (props) => {
+const MovieCard = (props) => {
+  const { id, title } = props;
 
-class MovieCard extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
     return (
       <div className="movie-card">
-        <section className="movie-img">
-         {this.props.image_url}
-        </section>
-        <section className="movie-card--body">
-          <p className="movie_title">{this.props.title }</p>
+        <section className="movie-card__title">
+          <h1> { props.title } </h1>
           <button
-            onClick={() => this.props.selectMovieCallback(this.props.id)}
+            onClick={() => this.props.selectMovieCallback(this.props.id, this.props.title)}
             type="button"
-            className="movie__select-btn"
-            label="Select"
-            />
-          Select
+            className="movie-card__select"
+            label="Select" >
+              Select
+          </button>
         </section>
       </div>
 
     );
   }
 
-}
-
 MovieCard.propTypes = {
   id: PropTypes.number.isRequired,
-
-  title: PropTypes.string.isRequired,
-  image_url: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   selectMovieCallback: PropTypes.func.isRequired,
 };
 
