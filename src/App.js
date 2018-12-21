@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Home from './components/Home';
 import axios from 'axios';
 import SearchForm from './components/SearchForm';
-import MovieLibrary from './components/MovieLibrary';
+import MovieList from './components/MovieList';
 import {BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Rental from './components/Rental';
 import CustomerList from './components/CustomerList';
@@ -170,7 +170,7 @@ class App extends Component {
             <CustomerList customers={this.state.customers} selectCustomerCallback={this.selectCustomer}/>}
           />
           <Route path="/library/" render={()=>
-            <MovieLibrary movies={this.state.library} selectMovieCallback={this.selectMovie}/>}
+            <MovieList movies={this.state.library} selectMovieCallback={this.selectMovie}/>}
           />
         </div>
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from './MovieCard';
 import axios from 'axios';
-import './MovieLibrary.css';
+import './MovieList.css';
 
 const URL = "http://localhost:3000/movies/";
 
