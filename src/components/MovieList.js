@@ -36,7 +36,7 @@ class MovieList extends Component {
     const movieList = this.state.movies.map((movie) => {
       return <MovieCard
       key={movie.id}
-      selectMovieCallback={movie.selectMovieCallback}
+      selectMovieCallback={this.props.selectMovieCallback}
       {...movie}
       />
     });

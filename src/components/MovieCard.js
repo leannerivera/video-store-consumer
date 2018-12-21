@@ -1,15 +1,18 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import './MovieCard.css';
 
-const MovieCard = (props) => {
-  const { id, title } = props;
+class MovieCard extends Component {
+  constructor(props) {
+    super(props);
+  }
 
+  render() {
     return (
       <div className="movie-card">
         <section className="movie-card__title">
-          <h1> { props.title } </h1>
+          <h1> { this.props.title } </h1>
           <button
             onClick={() => this.props.selectMovieCallback(this.props.id, this.props.title)}
             type="button"
@@ -20,12 +23,13 @@ const MovieCard = (props) => {
         </section>
       </div>
 
-    );
+    )}
   }
+
 
 MovieCard.propTypes = {
   id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   selectMovieCallback: PropTypes.func.isRequired,
 };
 

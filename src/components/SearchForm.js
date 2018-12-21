@@ -3,12 +3,14 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import './SearchForm.css';
 
+const SEARCH_URL = 'http://localhost:3000/movies/?query=';
+
 class SearchForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      movie: "",
+      results: "",
     };
   }
 
@@ -29,6 +31,24 @@ class SearchForm extends Component {
     this.setState({
       movie: "",
     })
+  }
+
+  searchMovie = (movie) => {
+    console.log(movie);
+
+    axios.get(SEARCH_URL + movie)
+      .then((response) => {
+        console.log(response.data);
+        const searchResults = response.data.map((result) => {
+          this.setState({results: result});
+        })
+        return searchResults;
+      })
+      .catch((error) => {
+        this.setState({
+          errorMessage: error.message
+        })
+      })
   }
 
   render () {
