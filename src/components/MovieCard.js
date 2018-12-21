@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
-import './movieCard.css';
+import './MovieCard.css';
 
 // const MovieCard = (props) => {
 
