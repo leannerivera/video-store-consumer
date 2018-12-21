@@ -12,20 +12,23 @@ class MovieCard extends Component {
 
   render() {
     return (
-      <div className="movie-card">
-        <section className="movie-img">
-         {this.props.image_url}
+      <div className="movie item">
+
+         <img src={this.props.image_url} alt="movie_post"/>
+
+        <section className="item_details">
+          <h2 className="movie_title">{this.props.title }</h2>
+          <p>{this.props.release_date}</p>
         </section>
-        <section className="movie-card--body">
-          <p className="movie_title">{this.props.title }</p>
           <button
             onClick={() => this.props.selectMovieCallback(this.props.id)}
             type="button"
-            className="movie__select-btn"
+            className="item__button"
             label="Select"
-            />
-          Select
-        </section>
+            >
+            Select For Rental
+          </button>
+
       </div>
 
     );
@@ -39,6 +42,7 @@ MovieCard.propTypes = {
   title: PropTypes.string.isRequired,
   image_url: PropTypes.string.isRequired,
   selectMovieCallback: PropTypes.func.isRequired,
+  release_date: PropTypes.string.isRequired,
 };
 
 export default MovieCard;

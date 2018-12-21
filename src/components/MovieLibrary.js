@@ -19,9 +19,10 @@ class MovieLibrary extends Component {
         id={movie.id}
         title={movie.title}
         image_url={movie.image_url}
+        release_date={movie.release_date}
         selectMovieCallback={this.props.selectMovieCallback}
       />
-      
+
     });
 
     return (
