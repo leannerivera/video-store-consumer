@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Home from './components/Home';
 import axios from 'axios';
 import SearchForm from './components/SearchForm';
-import MovieLibrary from './components/MovieLibrary';
+import MovieList from './components/MovieList';
 import {BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Rental from './components/Rental';
 import CustomerList from './components/CustomerList';
@@ -24,7 +24,6 @@ class App extends Component {
       // searchResults: [],
     };
   }
-
 
   addRental = (newRental) => {
     let rentalDue = new Date(new Date().getTime()+(14*24*60*60*1000));

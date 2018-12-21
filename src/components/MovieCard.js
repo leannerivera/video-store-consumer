@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import './MovieCard.css';
 
-// const MovieCard = (props) => {
+const MovieCard = (props) => {
+  const { id, title } = props;
 
-class MovieCard extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
     return (
       <div className="movie item">
 
@@ -21,7 +16,7 @@ class MovieCard extends Component {
           <p>{this.props.release_date}</p>
         </section>
           <button
-            onClick={() => this.props.selectMovieCallback(this.props.id)}
+            onClick={() => this.props.selectMovieCallback(this.props.id, this.props.title)}
             type="button"
             className="item__button"
             label="Select"
@@ -34,13 +29,9 @@ class MovieCard extends Component {
     );
   }
 
-}
-
 MovieCard.propTypes = {
   id: PropTypes.number.isRequired,
-
-  title: PropTypes.string.isRequired,
-  image_url: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   selectMovieCallback: PropTypes.func.isRequired,
   release_date: PropTypes.string.isRequired,
 };
