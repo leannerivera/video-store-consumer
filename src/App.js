@@ -98,16 +98,16 @@ class App extends Component {
 
   }
 
-  onSearchChange = (value) => {
-    const regex = new RegExp(`${value}`.toUpperCase());
-    console.log(value);
-    const library = this.state.library.filter((movie) => {
-      return regex.test(movie.name)
-    })
-    this.setState({
-      library,
-    })
-  }
+  // onSearchChange = (value) => {
+  //   const regex = new RegExp(`${value}`.toUpperCase());
+  //   console.log(value);
+  //   const library = this.state.library.filter((movie) => {
+  //     return regex.test(movie.name)
+  //   })
+  //   this.setState({
+  //     library,
+  //   })
+  // }
 
   selectCustomer = (customerId)=>{
     let customerClicked = this.state.customers.find(function(element) {
