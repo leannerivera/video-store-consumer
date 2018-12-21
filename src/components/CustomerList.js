@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+
 import Customer from './Customer';
 
 import './CustomerList.css';

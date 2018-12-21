@@ -13,10 +13,10 @@ class Rental extends Component {
   onSubmit = (event) => {
     event.preventDefault();
 
-    if (this.props.movie === '' || this.props.customerName === '') return;
+    if (this.props.movieSelect.title === '' || this.props.customerSelect.name === '') return;
 
     console.log(event);
-    this.props.addRentalCallback(this.props.movie, this.props.customerName);
+    this.props.addRentalCallback(this.props.movieSelect, this.props.customerSelect);
   }
 
   render() {
@@ -24,11 +24,11 @@ class Rental extends Component {
       <form onSubmit={this.onSubmit} name="new-rental-form" id="new-rental-form" className="new-rental-form">
         <div>
           <label className="new-rental-form--label" htmlFor="movie">Movie Selected</label>
-          <input name="movie" value={this.props.movie} />
+          <input name="movie" value={this.props.movieSelect.title} />
         </div>
         <div>
           <label className="new-rental-form--label" htmlFor="customer">Customer Selected</label>
-          <input name="customer" value={this.props.customerName} />
+          <input name="customer" value={this.props.customerSelect.name} />
         </div>
 
         <input className="btn btn-success new-rental-form--submit" type="submit" name="checkout" value="Checkout" />
@@ -39,8 +39,8 @@ class Rental extends Component {
 
 Rental.propTypes = {
   addRentalCallback: PropTypes.func.isRequired,
-  movie:PropTypes.func.isRequired,
-  customerName:PropTypes.string.isRequired,
+  movieSelect:PropTypes.func.isRequired,
+  customerSelect:PropTypes.func.isRequired,
 };
 
 export default Rental;

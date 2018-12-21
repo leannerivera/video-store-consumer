@@ -14,13 +14,13 @@ class Customer extends Component {
 
     return (
       <div className="customer item">
-           <div claaName="item_details">
+           <div className="item_details">
              <h2 className="customer__content-name">{this.props.name}</h2>
              <p></p>
              <p className="movie_checkout_count">{this.props.movieCheckCount} movies checked out</p>
            </div>
            <button
-             onClick={() => this.props.selectCustomerCallback(this.props.id, this.props.name)}
+             onClick={() => this.props.selectCustomerCallback(this.props.id)}
              type="button"
              className="customer__select-btn"
              label="Select"

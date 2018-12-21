@@ -18,13 +18,10 @@ class App extends Component {
     this.state = {
       library: [],
       movieSelected: "",
-      customerSelectedId: undefined,
-      customerSelectedName:undefined,
       customers: [],
       customerSelected: "",
     };
   }
-
 
 
   addRental = (newRental) => {
@@ -32,7 +29,7 @@ class App extends Component {
     let dd = rentalDue.getDate();
     let mm = rentalDue.getMonth()+1;
     let yyyy = rentalDue.getFullYear();
-    const selectedMovie = encodeURIComponent(this.state.movieSelected);
+    const selectedMovie = encodeURIComponent(this.state.movieSelected.title);
 
     if(dd<10) {
       dd='0'+dd
@@ -45,15 +42,14 @@ class App extends Component {
     const dueDate = yyyy.toString() + "-"+mm.toString()+"-"+dd.toString();
     const apiPayload = {
       ...newRental,
-      customer: this.state.customerSelectedId,
-      dueDate: dueDate,
+      customer_id: this.state.customerSelected.id,
+      due_date: dueDate,
     }
 
-    axios.post(RENTAL_URL + selectedMovie, apiPayload)
+    axios.post(RENTAL_URL + selectedMovie+'/check-out', apiPayload)
     .then((response)=>{
-      // console.log('API Response Success')
-      // console.log(response);
-      const myNewRental = response.data;
+
+      // const myNewRental = response.data;
 
       this.setState({
         movieSelected: "",
@@ -74,17 +70,6 @@ class App extends Component {
   componentDidMount() {
     axios.get(URL)
     .then((response) =>{
-      // const movies = response.data.map((film) => {
-      //   console.log(movie.title);
-      //   const movie = {
-      //     ...movie,
-      //     id: film.id,
-      //     movie: film.title,
-      //     about: film.overview,
-      //     image: film.image_url,
-      //   }
-      //   return movie;
-      // })
 
       this.setState({
         library: response.data,
@@ -122,11 +107,27 @@ class App extends Component {
     this.setState({
       library,
     })
+  }
+
+  selectCustomer = (customerId)=>{
+    let customerClicked = this.state.customers.find(function(element) {
+      if (element.id == customerId) {
+      return element }
+    }) ;
+
+    this.setState({customerSelected: customerClicked});
+
   };
 
-  selectCustomer = (customerId, customerName)=>{
+  selectMovie = (movieId)=>{
+    console.log(movieId);
+    let movieClicked = this.state.library.find(function(element) {
+      if (element.id == movieId) {
+      return element }
+    }) ;
 
-    this.setState({customerSelectedId: customerId, customerSelectedName: customerName});
+    this.setState({movieSelected: movieClicked});
+
 
   };
 
@@ -155,11 +156,9 @@ class App extends Component {
 
             <section className="rentalBox">
               <Rental
-                customerId = {this.state.customerSelectedId}
-                customerName = {this.state.customerSelectedName}
-                movie = {this.state.movieSelected}
+                customerSelect = {this.state.customerSelected}
+                movieSelect = {this.state.movieSelected}
                 addRentalCallback={this.addRental}
-
                 />
 
             </section>
