@@ -20,6 +20,8 @@ class App extends Component {
       movieSelected: "",
       customers: [],
       customerSelected: "",
+      // searchEntry: "",
+      // searchResults: [],
     };
   }
 
@@ -98,16 +100,6 @@ class App extends Component {
 
   }
 
-  // onSearchChange = (value) => {
-  //   const regex = new RegExp(`${value}`.toUpperCase());
-  //   console.log(value);
-  //   const library = this.state.library.filter((movie) => {
-  //     return regex.test(movie.name)
-  //   })
-  //   this.setState({
-  //     library,
-  //   })
-  // }
 
   selectCustomer = (customerId)=>{
     let customerClicked = this.state.customers.find(function(element) {
@@ -128,9 +120,43 @@ class App extends Component {
 
     this.setState({movieSelected: movieClicked});
 
-
   };
 
+
+  // onChangeHandler = (event) => {
+  //   this.setState({
+  //     searchEntry: event.target.value.toUpperCase(),
+  //   });
+  // }
+  //
+  // onSearchHandler = (event) => {
+  //
+  //   event.preventDefault();
+  //
+  //
+  //   const url = 'http://localhost:3000/movies?query=';
+  //   const encodedQuery = encodeURIComponent(this.state.searchEntry);
+  //
+  //
+  //   axios.get(url+encodedQuery)
+  //
+  //    .then((response)=>{
+  //      this.setState({
+  //        searchResults: response.data,
+  //        searchEntry:"",
+  //      });
+  //    })
+  //    .catch((error)=>{
+  //      this.setState({
+  //        errorMessage: error.message,
+  //      });
+  //    });
+  //
+  // }
+  //
+  // addToLibrary = () => {
+  //
+  // }
 
 
   render() {
@@ -166,12 +192,30 @@ class App extends Component {
 
           <Route path="/" exact component={Home} />
 
-          <Route path="/search/" render={()=> <SearchForm searchMovieCallback={this.onSearchChange}/>} />
+          <Route path="/search/" render={()=>
+             <
+              SearchForm
+                // searchEntry={this.state.searchEntry}
+              // searchResults={this.state.seachResults}
+              // searchMovieCallback={this.onSearchChange}
+              // onChangeHandlerCallback={this.onChangeHandler}
+              addLibraryCallback={this.addToLibrary}
+              />
+            }
+          />
           <Route path="/customers/" render={()=>
-            <CustomerList customers={this.state.customers} selectCustomerCallback={this.selectCustomer}/>}
+            <
+             CustomerList customers={this.state.customers}
+             selectCustomerCallback={this.selectCustomer}
+            />
+           }
           />
           <Route path="/library/" render={()=>
-            <MovieLibrary movies={this.state.library} selectMovieCallback={this.selectMovie}/>}
+            <
+             MovieLibrary movies={this.state.library}
+             selectMovieCallback={this.selectMovie}
+            />
+           }
           />
         </div>
 

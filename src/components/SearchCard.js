@@ -10,6 +10,8 @@ class SearchCard extends Component {
     super(props);
   }
 
+
+
   render() {
     return (
       <div className="movie item">
@@ -21,7 +23,7 @@ class SearchCard extends Component {
           <p>{this.props.release_date}</p>
         </section>
           <button
-            onClick={() => this.props.addLibraryCallback(this.props.id)}
+            onClick={() => this.props.addLibraryCallback(this.props)}
             type="button"
             className="item__button"
             label="Select"
@@ -38,7 +40,7 @@ class SearchCard extends Component {
 
 SearchCard.propTypes = {
   id: PropTypes.number.isRequired,
-
+  overview:PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   image_url: PropTypes.string.isRequired,
   selectMovieCallback: PropTypes.func.isRequired,
