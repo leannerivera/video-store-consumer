@@ -10,7 +10,7 @@ class SearchForm extends Component {
     super(props);
 
     this.state = {
-      results: "",
+      results: [],
     };
   }
 
@@ -18,7 +18,6 @@ class SearchForm extends Component {
     this.setState({
       movie: event.target.value.toUpperCase(),
     });
-    this.props.onChangeHandler(event.target.value);
   }
 
   onSubmitHandler = (event) => {
@@ -38,11 +37,14 @@ class SearchForm extends Component {
 
     axios.get(SEARCH_URL + movie)
       .then((response) => {
-        console.log(response.data);
+        console.log("RESPONSE" + response.data);
         const searchResults = response.data.map((result) => {
-          this.setState({results: result});
+          return result
         })
-        return searchResults;
+        console.log(searchResults);
+        this.setState({
+          results: searchResults,
+        })
       })
       .catch((error) => {
         this.setState({
@@ -67,7 +69,7 @@ class SearchForm extends Component {
             onChange={this.onChangeHandler}
           />
 
-          <input type="submit" value="submit" onSubmit={this.onSubmitHandler}/>
+          <input type="submit" value="submit" />
 
         </form>
       </div>

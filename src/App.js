@@ -8,7 +8,6 @@ import Rental from './components/Rental';
 import CustomerList from './components/CustomerList';
 
 const URL = 'http://www.localhost:3000/';
-const SEARCH_URL = 'http://localhost:3000/movies/?query=';
 const RENTAL_URL = 'http://localhost:3000/rentals/';
 
 class App extends Component {
@@ -130,23 +129,6 @@ class App extends Component {
 
   };
 
-  searchMovie = (movie) => {
-    console.log(movie);
-
-    axios.get(SEARCH_URL + movie)
-      .then((response) => {
-        const results = response.data.map((result) => {
-          this.setState({library: result});
-        })
-        return results;
-      })
-      .catch((error) => {
-        this.setState({
-          errorMessage: error.message,
-        })
-      })
-  }
-
 
   render() {
 
@@ -169,17 +151,13 @@ class App extends Component {
               </li>
             </ul>
 
-            <section className="rental-box">
+            <section className="rentalBox">
               <Rental
                 customerSelect = {this.state.customerSelected}
                 movieSelect = {this.state.movieSelected}
                 addRentalCallback={this.addRental}
                 />
-            </section>
 
-            <section className="search-box">
-              <SearchForm     searchMovieCallback={this.searchMovie}
-              />
             </section>
           </nav>
 
